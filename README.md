@@ -6,9 +6,9 @@ El objetivo fue evaluar el rendimiento, uso de memoria y CPU de distintas herram
 
 ---
 
-## 🧱 1. Infraestructura y Preparación de Datos
+## 1. Infraestructura y Preparación de Datos
 
-### 📁 Estructura de Datos en S3
+### Estructura de Datos en S3
 Los datos se almacenaron en el bucket:
 s3a://terraform-51257688b24ec567/
 
@@ -31,11 +31,11 @@ Los archivos `.json` (~94 KB cada uno) contienen arreglos de logs con campos:
 
 ---
 
-## ⚙️ 2. Metodología de Implementación
+## 2. Metodología de Implementación
 
 Se desarrollaron y compararon dos estrategias principales de procesamiento desde S3.
 
-### 🧩 Enfoque Híbrido (Hybrid I/O)
+### Enfoque Híbrido (Hybrid I/O)
 Usado en **Pandas** y **Polars** por problemas de autenticación y versión.  
 El flujo fue:
 
@@ -47,7 +47,7 @@ El flujo fue:
 |--------------|-------------|-------------|
 | Python / Pandas / Polars | Descarga secuencial + procesamiento vectorizado | Iteración lenta vía boto3, luego procesamiento local eficiente. |
 
-### 🚀 Enfoque Nativo (Native S3 I/O)
+### Enfoque Nativo (Native S3 I/O)
 Intento original de lectura paralela directa desde S3.
 
 | Herramienta | Estrategia | Descripción |
@@ -56,9 +56,9 @@ Intento original de lectura paralela directa desde S3.
 
 ---
 
-## 💻 3. Tutorial: Comandos Esenciales
+## 3. Tutorial: Comandos Esenciales
 
-### 🧩 Preparación del entorno
+### Preparación del entorno
 Cada metodología tenía su propio ambiente virtual:
 
 ```bash
@@ -67,7 +67,7 @@ cd ~/ex-polars
 python3.12 -m venv .venv
 . .venv/bin/activate
 ```
-# 📦 Instalación de dependencias
+# Instalación de dependencias
 ### Polars o Pandas
 pip install polars boto3
 pip install pandas boto3
@@ -75,21 +75,16 @@ pip install pandas boto3
 ### Python puro
 pip install boto3
 
-### ⚡ Ejecución del Benchmark
+### Ejecución del Benchmark
 
 Cada prueba se medía con `/usr/bin/time -v`:
 
 ```bash
 /usr/bin/time -v python main.py s3://[NOMBRE-BUCKET]/[TAMAÑO-GB]
-
-
-**Ejemplo (Polars, 10 GB):**
-
-`/usr/bin/time -v python main.py s3://terraform-51257688b24ec567/10gb`
 ```
 * * * * *
 
-🔥 4. Configuración de Spark y Conexión a S3
+## 4. Configuración de Spark y Conexión a S3
 --------------------------------------------
 
 ### 4.1 Solución de Incompatibilidad Java / PySpark
@@ -122,8 +117,7 @@ JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64`
   /home/ssm-user/ex-spark/main.py s3a://terraform-51257688b24ec567/20gb`
 ```
 * * * * *
-
-🧠 5. Organización de la Infraestructura
+## 5. Organización de la Infraestructura
 ----------------------------------------
 
 Estructura modular por carpetas:
@@ -139,7 +133,7 @@ Cada carpeta tiene su propio entorno virtual (`.venv`) para evitar conflictos de
 
 * * * * *
 
-📈 6. Resultados del Benchmark
+## 6. Resultados del Benchmark
 ------------------------------
 
 | Workload (GB) | Tool | Time (min) | Peak RAM (MB) | Avg CPU (%) |
@@ -156,16 +150,16 @@ Cada carpeta tiene su propio entorno virtual (`.venv`) para evitar conflictos de
 
 * * * * *
 
-🧩 7. Conclusiones del Benchmark
+## 7. Conclusiones del Benchmark
 --------------------------------
 
-### ⚡ Rendimiento Bruto
+###  Rendimiento Bruto
 
 -   **DuckDB** y **Spark** fueron las herramientas más rápidas.
 
 -   Spark mostró una **escalabilidad casi lineal**: duplicar el tamaño de los datos duplicó el tiempo de ejecución.
 
-### 🦆 DuckDB: Procesamiento Vectorizado
+###  DuckDB: Procesamiento Vectorizado
 
 -   Motor columnar **OLAP** con lectura directa y eficiente.
 
@@ -173,7 +167,7 @@ Cada carpeta tiene su propio entorno virtual (`.venv`) para evitar conflictos de
 
 -   **CPU estable (~60%)** y tiempo bajo.
 
-### 🔥 Spark: Paralelismo Distribuido
+###  Spark: Paralelismo Distribuido
 
 -   Lectura paralela desde S3 y **DAG optimizado**.
 
@@ -181,7 +175,7 @@ Cada carpeta tiene su propio entorno virtual (`.venv`) para evitar conflictos de
 
 -   Mayor uso de RAM por la **sobrecarga de la JVM**.
 
-### 💾 Sobrecarga JVM e In-Memory Processing
+###  Sobrecarga JVM e In-Memory Processing
 
 -   La JVM introduce sobrecarga por gestión de objetos y *garbage collection*.
 
@@ -191,7 +185,7 @@ Cada carpeta tiene su propio entorno virtual (`.venv`) para evitar conflictos de
 
 * * * * *
 
-🧪 8. Análisis de la Data
+## 8. Análisis de la Data
 -------------------------
 
 La data sintética generada simula logs de API con distribución uniforme:
@@ -204,7 +198,7 @@ La data sintética generada simula logs de API con distribución uniforme:
 
 * * * * *
 
-📚 9. Métricas de Evaluación
+## 9. Métricas de Evaluación
 ----------------------------
 
 Las métricas fueron medidas con `/usr/bin/time -v`:
@@ -216,11 +210,7 @@ Las métricas fueron medidas con `/usr/bin/time -v`:
 -   **CPU promedio (%)**
 
 * * * * *
-
-🧾 Créditos
 -----------
-
-**Autora:**\
 María del Rosario Castro Mantilla\
 **Universidad EAFIT -- Maestría en Ciencia de Datos y Analítica**\
 Curso: *Minería de Grandes Volúmenes de Datos -- Taller 3*
