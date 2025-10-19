@@ -67,15 +67,15 @@ cd ~/ex-polars
 python3.12 -m venv .venv
 . .venv/bin/activate
 ```
-## 📦 Instalación de dependencias
-# Polars o Pandas
+# 📦 Instalación de dependencias
+### Polars o Pandas
 pip install polars boto3
 pip install pandas boto3
 
-# Python puro
+### Python puro
 pip install boto3
 
-# ⚡ Ejecución del Benchmark
+### ⚡ Ejecución del Benchmark
 
 Cada prueba se medía con `/usr/bin/time -v`:
 
