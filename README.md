@@ -66,7 +66,7 @@ mkdir -p ~/ex-polars
 cd ~/ex-polars
 python3.12 -m venv .venv
 . .venv/bin/activate
-
+```
 ##📦 Instalación de dependencias
 # Polars o Pandas
 pip install polars boto3
@@ -86,17 +86,17 @@ Cada prueba se medía con `/usr/bin/time -v`:
 **Ejemplo (Polars, 10 GB):**
 
 `/usr/bin/time -v python main.py s3://terraform-51257688b24ec567/10gb`
-
+```
 * * * * *
 
 🔥 4. Configuración de Spark y Conexión a S3
 --------------------------------------------
 
 ### 4.1 Solución de Incompatibilidad Java / PySpark
-
+```
 `pip install pyspark==3.2.4
 JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64`
-
+```
 ### 4.2 Configuración de Conectividad a S3
 
 | Parámetro | Propósito |
@@ -111,7 +111,7 @@ JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64`
 --add-opens=java.base/jdk.internal.misc=ALL-UNNAMED"`
 
 ### 4.4 Ejemplo Final (20 GB)
-
+```
 `/usr/bin/time -v env JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64 spark-submit\
   --master local[*]\
   --packages org.apache.hadoop:hadoop-aws:3.3.1\
@@ -120,7 +120,7 @@ JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64`
   --add-opens=java.base/java.nio=ALL-UNNAMED\
   --add-opens=java.base/jdk.internal.misc=ALL-UNNAMED"\
   /home/ssm-user/ex-spark/main.py s3a://terraform-51257688b24ec567/20gb`
-
+```
 * * * * *
 
 🧠 5. Organización de la Infraestructura
