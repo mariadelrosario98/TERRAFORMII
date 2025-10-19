@@ -67,7 +67,7 @@ cd ~/ex-polars
 python3.12 -m venv .venv
 . .venv/bin/activate
 ```
-##📦 Instalación de dependencias
+## 📦 Instalación de dependencias
 # Polars o Pandas
 pip install polars boto3
 pip install pandas boto3
